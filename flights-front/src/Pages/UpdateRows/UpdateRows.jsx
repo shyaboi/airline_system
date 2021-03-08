@@ -10,27 +10,28 @@ import {
 import fetchy from "../../Utils/Fetcher";
 var xhr = new XMLHttpRequest();
 
-const Update = (props) => {
+const Delete = (props) => {
 
   const [table, setTable] = useState("");
-  const [values, setValues] = useState("");
+  const [value, setValue] = useState("");
+  const [where, setWhere] = useState("");
   const [tableData, setTableData] = useState([]);
   //   const [fetchData, setFetchData] = useState([]);
 
   const poster = () => {
-    let url = `http://localhost:5555/admin/add${table.charAt(0).toUpperCase() + table.slice(1)}`;
+    let url = "http://localhost:5555/admin/updateRow";
     xhr.open("POST", url, true);
     xhr.setRequestHeader(
       "Content-Type",
       "application/json"
     );
     xhr.onreadystatechange = function() {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-            alert("Message From Spring Servlet:\n"+xhr.responseText);
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            alert(xhr.responseText);
         }
     }
     
-    xhr.send(values.toString());
+    xhr.send(table+","+value+","+where.toString());
   };
 
   const fetcher = (route) => {
@@ -43,7 +44,7 @@ const Update = (props) => {
   };
 
 
-  const add = ()=> {
+  const del = ()=> {
 
     poster()
     setTimeout(() => {
@@ -69,10 +70,10 @@ const Update = (props) => {
           <h1>You are admin</h1>
         </Row>
         <Row className="card">
-          <h3>Add Something</h3>
+          <h3>Update Something</h3>
         </Row>
         <Row className="mt-5 card">
-          Enter a table to add to
+          Enter a table to update from
           <Input
             onChange={(e) => setTable(e.target.value)}
             onKeyDown={handleKeyDown}
@@ -83,19 +84,30 @@ const Update = (props) => {
           />
         </Row>
         <Row className="mt-5 card">
-          Enter the values to add to your table in order
+          Enter value you want input
           <Input
-            onChange={(e) => setValues(e.target.value)}
+            onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
             type="table"
             name="input"
             id="exampleEmail"
-            placeholder="'ZZZ','Lingenberry'"
+            placeholder="Example: iata_id='ZZZ'"
+          />
+        </Row>
+        <Row className="mt-5 card">
+          Enter an identifier to find the row you want changed
+          <Input
+            onChange={(e) => setWhere(e.target.value)}
+            onKeyDown={handleKeyDown}
+            type="table"
+            name="input"
+            id="exampleEmail"
+            placeholder="Example: id=1"
           />
         </Row>
       </Container>
       <Row className="card">
-        <Button  onClick={add}>Add Values</Button>
+        <Button  onClick={del}>Update Row</Button>
       </Row>
       <Container className="card mt-5">
             Info From {table}

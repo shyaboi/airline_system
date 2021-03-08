@@ -19,6 +19,7 @@ import Login from '../../Pages/Login/Login'
 import GetAll from '../../Pages/GetAllDB/GetAllDB'
 import Delete from "../../Pages/DeleteRows/DeleteRows";
 import Add from "../../Pages/AddRows/AddRows";
+import Update from "../../Pages/UpdateRows/UpdateRows";
 
 
 const NavBar = (props) => {
@@ -30,7 +31,7 @@ const NavBar = (props) => {
       <Router>
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Welcome Admin</NavbarBrand>
+        <NavbarBrand href="/">Utopia Airlines</NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
@@ -38,17 +39,20 @@ const NavBar = (props) => {
               <NavLink href="/getALL">Select All DB</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/delete">Delete from DB</NavLink>
+              <NavLink href="/delete">Delete Rows</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/add">Add to DB</NavLink>
+              <NavLink href="/add">Add Rows</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/update">Update Rows</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/login">Login</NavLink>
             </NavItem>
            
           </Nav>
-          <NavbarText>Utopia Airlines</NavbarText>
+          <NavbarText right className="ml-auto">Welcome Admin</NavbarText>
         </Collapse>
       </Navbar>
 
@@ -71,6 +75,9 @@ const NavBar = (props) => {
           </Route>
           <Route path="/add">
             <Add />
+          </Route>
+          <Route path="/update">
+            <Update />
           </Route>
         </Switch>
     </Router>

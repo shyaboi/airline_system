@@ -90,7 +90,7 @@ const Add = (props) => {
             type="table"
             name="input"
             id="exampleEmail"
-            placeholder="'ZZZ','Lingenberry'"
+            placeholder="Example: 'ZZZ','Lingenberry'"
           />
         </Row>
       </Container>
