@@ -8,47 +8,51 @@ import com.ss.flights.DBConnection.UpdateRow.UpdateRow;
 import com.ss.flights.DBConnection.AddDataToTable.*;
 import com.ss.flights.DBConnection.DeleteWhere.DeleteWhere;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-//creating spring rest controller
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+// creating spring rest controller
 @RestController
 // mapping to airports route
 @RequestMapping("/admin")
 // declare class AirportController
-public class OtherController {
+public class AdminRouteController {
 
-
-//UPDATE POST ROUTE==========================================================================================================
-    //modular universal update single table/col post map
+    // UPDATE POST
+    // ROUTE==========================================================================================================
+    // modular universal update single table/col post map
     @PostMapping("/deleteRow")
     // delete any single table/row
-    // as a string format such as;       airport,iata_id='LLL'
+    // as a string format such as; airport,iata_id='LLL'
     public String deleteRow(@RequestBody String data) {
-        //getting new update method from updatecols class
+        // getting new update method from updatecols class
         DeleteWhere del = new DeleteWhere();
         del.delete(data);
         return data + " Deleted!!!!!!!!!!!";
     }
-//END UPDATE POST ROUTE==========================================================================================================
+    // END UPDATE POST
+    // ROUTE==========================================================================================================
 
-//UPDATE POST ROUTE==========================================================================================================
-    //modular universal update single table/col post map
+    // UPDATE POST
+    // ROUTE==========================================================================================================
+    // modular universal update single table/col post map
     @PostMapping("/updateRow")
     // update any single table/row
-    // as a string format such as;     airport,iata_id='LLL',city='Lingenberry'
+    // as a string format such as; airport,iata_id='LLL',city='Lingenberry'
     public String updateRow(@RequestBody String data) {
-        //getting new update method from updatecols class
+        // getting new update method from updatecols class
         UpdateRow up = new UpdateRow();
         up.updateRow(data);
         return data + " Updated to Col and Table";
     }
-//END UPDATE POST ROUTE==========================================================================================================
-
-
+    // END UPDATE POST
+    // ROUTE==========================================================================================================
 
     // addAirport post route
     // ----------------------------------------------------------------------------------------------------------------------
@@ -159,18 +163,12 @@ public class OtherController {
     // ----------------------------------------------------------------------------------------------------------------------
     // =======================================================================================================================
 
-
-
-
-
-    
-
     // Start Get All ROUTES
     // ----------------------------------------------------------------------------------------------------------------------
     // =======================================================================================================================
     // allAirports Get route
     // ---------------------------------------------------------------------------------------------------------------
-    @GetMapping("/allAirports")
+    @GetMapping(path = "/allAirports", produces = "application/json")
     // return a list of all airports
     public ArrayList<String> getAllAirports(ArrayList<String> airports) {
         // make new get all from sql
@@ -244,24 +242,71 @@ public class OtherController {
     // END allEmployees Get route
     // ---------------------------------------------------------------------------------------------------------------
 
-
-
-
     // allUsers Get
     // ---------------------------------------------------------------------------------------------------------------
 
-    // // map to /admin/allUsers
-    // @GetMapping("/allUsers")
-    // // return a list of all airports
-    // public ArrayList<String> getAllUsers(ArrayList<String> users) {
-    // // make new get all from sql
-    // GetAllDataTable getAll = new GetAllDataTable();
-    // // parse the values of iata_id and city to String[]
-    // String[] dataList = { "id", "role_id", "given_name", "family_name",
-    // "username", "email", "password", "phone" };
-    // // return the ArrayList of Strings
-    // return getAll.getTableData(users, "user", dataList);
-    // }
+    // map to /admin/allUsers
+    @GetMapping("/allUsers")
+    // return a list of all airports
+    public ArrayList<String> getAllUsers(ArrayList<String> users) {
+        // make new get all from sql
+        GetAllDataTable getAll = new GetAllDataTable();
+        // parse the values of iata_id and city to String[]
+        String[] dataList = { "id", "role_id", "given_name", "family_name", "username", "email", "password", "phone" };
+        // return the ArrayList of Strings
+        return getAll.getTableData(users, "user", dataList);
+    }
+    // END allUsers Get
+    // ---------------------------------------------------------------------------------------------------------------
+
+    // allAirplanes Get
+    // ---------------------------------------------------------------------------------------------------------------
+
+    // map to /admin/allUsers
+    @GetMapping("/allAirplanes")
+    // return a list of all airports
+    public ArrayList<String> getAllAirplanes(ArrayList<String> users) {
+        // make new get all from sql
+        GetAllDataTable getAll = new GetAllDataTable();
+        // parse the values of iata_id and city to String[]
+        String[] dataList = { "id", "type_id" };
+        // return the ArrayList of Strings
+        return getAll.getTableData(users, "airplane", dataList);
+    }
+    // END allUsers Get
+    // ---------------------------------------------------------------------------------------------------------------
+
+    // allAirplanesType Get
+    // ---------------------------------------------------------------------------------------------------------------
+
+    // map to /admin/allUsers
+    @GetMapping("/allAirplaneTypes")
+    // return a list of all airports
+    public ArrayList<String> getAllAirplaneTypes(ArrayList<String> users) {
+        // make new get all from sql
+        GetAllDataTable getAll = new GetAllDataTable();
+        // parse the values of iata_id and city to String[]
+        String[] dataList = { "id", "max_capacity" };
+        // return the ArrayList of Strings
+        return getAll.getTableData(users, "airplane_type", dataList);
+    }
+    // END allUsers Get
+    // ---------------------------------------------------------------------------------------------------------------
+
+    // allAirplanesType Get
+    // ---------------------------------------------------------------------------------------------------------------
+
+    // map to /admin/allUsers
+    @GetMapping("/allRoutes")
+    // return a list of all airports
+    public ArrayList<String> getAllRoutes(ArrayList<String> users) {
+        // make new get all from sql
+        GetAllDataTable getAll = new GetAllDataTable();
+        // parse the values of iata_id and city to String[]
+        String[] dataList = { "id", "origin_id", "destination_id" };
+        // return the ArrayList of Strings
+        return getAll.getTableData(users, "route", dataList);
+    }
     // END allUsers Get
     // ---------------------------------------------------------------------------------------------------------------
 }
