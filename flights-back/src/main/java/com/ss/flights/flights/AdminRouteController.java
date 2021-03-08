@@ -31,6 +31,7 @@ public class AdminRouteController {
     // delete any single table/row
     // as a string format such as; airport,iata_id='LLL'
     public String deleteRow(@RequestBody String data) {
+        System.out.println(data);
         // getting new update method from updatecols class
         DeleteWhere del = new DeleteWhere();
         del.delete(data);
@@ -214,7 +215,7 @@ public class AdminRouteController {
 
     // allPassangers Get route
     // ---------------------------------------------------------------------------------------------------------------
-    @GetMapping("/allPassangers")
+    @GetMapping("/allPassengers")
     // return a list of all airports
     public ArrayList<String> getAllPassangers(ArrayList<String> passangers) {
         // make new get all from sql

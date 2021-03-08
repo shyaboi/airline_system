@@ -1,14 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-  Route,
-  Link,
-  useHistory,
-  browserHistory 
-} from "react-router-dom";
-
 
 import {
   Col,
@@ -54,7 +44,7 @@ useEffect(() => {
        <Card className={ninja}>
         <CardImg top className="img-fluid" src={plane} alt="Card image cap" />
         <CardBody>
-          <CardTitle tag="h5">Airline</CardTitle>
+          <CardTitle tag="h5">Utopia Airlines</CardTitle>
           <CardSubtitle tag="h6" className="mb-2 text-muted">Admin Login</CardSubtitle>
           <CardText>Login with your admin credentials below</CardText>
         </CardBody>
@@ -65,13 +55,13 @@ useEffect(() => {
         <Col>
       <Form>
         <FormGroup>
-          <Label for="exampleEmail">Email</Label>
+          <Label for="exampleEmail">Username</Label>
           <Input
             onChange={(e) => setUser(e.target.value)}
             type="email"
             name="email"
             id="exampleEmail"
-            placeholder="with a placeholder"
+            placeholder="Employee"
           />
         </FormGroup>
         <FormGroup>
@@ -81,7 +71,7 @@ useEffect(() => {
             type="password"
             name="password"
             id="examplePassword"
-            placeholder="password placeholder"
+            placeholder="P@ssword!123"
           />
         </FormGroup>
        <NavLink redirect href="/getAll" > 
