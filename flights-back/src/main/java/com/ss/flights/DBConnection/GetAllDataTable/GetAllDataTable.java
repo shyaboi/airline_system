@@ -23,17 +23,10 @@ public class GetAllDataTable {
                     String x = rs.getString(s);
                     list.add(x);
                 }
-
-                /*
-                *LEGACY PRINTS TO CHECK DATA FROM DIFFERENT TABLES
-                 *  String city = rs.getString("city");
-                 *  list.add(city); 
-                 *  System.out.println(city);
-                 *
-                 */
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("Exception occurred");
         } finally {
             conn.disconnect();
         }
