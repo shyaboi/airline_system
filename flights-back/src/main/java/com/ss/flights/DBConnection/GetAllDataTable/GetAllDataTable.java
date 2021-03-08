@@ -11,9 +11,10 @@ public class GetAllDataTable {
     public ArrayList<String> getTableData(ArrayList<String> list,String table, String... optional) {
         //bring in connection from DB new
         Conn conn = new Conn();
-        //
+        //sql statment 
         String sql = "SELECT * FROM " + table;
         try {
+            
             PreparedStatement ps = conn.connect().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
