@@ -2,7 +2,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Redirect
   } from "react-router-dom";
 import React, { useState } from 'react';
 import {
@@ -13,14 +13,12 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   NavbarText
 } from 'reactstrap';
 import Login from '../../Pages/Login/Login'
 import GetAll from '../../Pages/GetAllDB/GetAllDB'
+import Delete from "../../Pages/DeleteRows/DeleteRows";
+import Add from "../../Pages/AddRows/AddRows";
 
 
 const NavBar = (props) => {
@@ -40,6 +38,12 @@ const NavBar = (props) => {
               <NavLink href="/getALL">Select All DB</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink href="/delete">Delete from DB</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/add">Add to DB</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink href="/login">Login</NavLink>
             </NavItem>
            
@@ -53,11 +57,20 @@ const NavBar = (props) => {
 
     </div>
       <Switch>
+      <Route exact path="/">
+    <Redirect to="/login" />
+</Route>
           <Route path="/login">
             <Login />
           </Route>
           <Route path="/getAll">
             <GetAll />
+          </Route>
+          <Route path="/delete">
+            <Delete />
+          </Route>
+          <Route path="/add">
+            <Add />
           </Route>
         </Switch>
     </Router>
