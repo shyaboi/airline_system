@@ -4,6 +4,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Conn {
 
     // init database constants

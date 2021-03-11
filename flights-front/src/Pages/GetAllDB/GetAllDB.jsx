@@ -15,7 +15,7 @@ const GetAllDB = (props) => {
   const [fetchData, setFetchData] = useState([]);
 
   const fetcher = (r) => {
-    r = "/all" + route.charAt(0).toUpperCase() + route.slice(1) + "s";
+    r = route;
     fetchy(`http://localhost:5555/admin/${r}`).then(async (data) => {
       let d = await data;
       setFetchData(d);
@@ -58,7 +58,7 @@ const GetAllDB = (props) => {
           {fetchData.map((n) => (
             <Col className="db">
               <ListGroupItem key={n.toString()} className="card" value={n}>
-                {n}
+                  <td>{n.toString()}</td>
               </ListGroupItem>
             </Col>
           ))}

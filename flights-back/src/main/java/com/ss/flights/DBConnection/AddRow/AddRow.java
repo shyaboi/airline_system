@@ -1,16 +1,23 @@
-package com.ss.flights.DBConnection.AddDataToTable;
+package com.ss.flights.DBConnection.AddRow;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.ss.flights.DBConnection.Conn;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 // universal add data to any all string table method 
-public class AddDataToTable {
+@Component
+public class AddRow {
+    @Autowired
+    Conn conn;
     //add table data methos taking in table, string[] with DB cols and what values to add
-    public String addTableData(String table, String[] cols,  String value) {
-        // bring in connection from DB new
-        Conn conn = new Conn();
+    public String addTableData(String table, ArrayList<String> cols,  String value) {
+     
+   
         //make a new string builder
         StringBuilder colBuilder = new StringBuilder();
         //for loop through given cols to make new string from array

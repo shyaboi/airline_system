@@ -36,16 +36,16 @@ const NavBar = (props) => {
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
             <NavItem>
-              <NavLink href="/getALL">Select All DB</NavLink>
+              <NavLink href="/getALL">See Data</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/delete">Delete Rows</NavLink>
+              <NavLink href="/delete">Delete</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/add">Add Rows</NavLink>
+              <NavLink href="/add">Add</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/update">Update Rows</NavLink>
+              <NavLink href="/update">Update</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/login">Login</NavLink>
