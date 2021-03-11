@@ -10,17 +10,18 @@ import {
 import fetchy from "../../Utils/Fetcher";
 var xhr = new XMLHttpRequest();
 
-const Delete = (props) => {
+const Update = (props) => {
 
   const [table, setTable] = useState("");
+  const [id, setID] = useState("");
+  const [item, setItem] = useState("");
   const [value, setValue] = useState("");
-  const [where, setWhere] = useState("");
   const [tableData, setTableData] = useState([]);
   //   const [fetchData, setFetchData] = useState([]);
 
   const poster = () => {
-    let url = "http://localhost:5555/admin/updateRow";
-    xhr.open("POST", url, true);
+    let url = `http://localhost:5555/admin/${table}/${item}/${id}`;
+    xhr.open("PUT", url, true);
     xhr.setRequestHeader(
       "Content-Type",
       "application/json"
@@ -31,11 +32,11 @@ const Delete = (props) => {
         }
     }
     
-    xhr.send(table+","+value+","+where.toString());
+    xhr.send(value);
   };
 
-  const fetcher = (route) => {
-    let r = '/all'+ route.charAt(0).toUpperCase() + route.slice(1) + "s"
+  const fetcher = () => {
+    let r = table
     fetchy(`http://localhost:5555/admin/${r}`).then(async (data) => {
       let d = await data;
       console.log(d)
@@ -71,8 +72,9 @@ const Delete = (props) => {
         </Row>
         <Row className="card">
           <h3>Update Something</h3>
-        </Row>
-        <Row className="mt-5 card">
+        </Row >
+        <Row>
+        <Col className="mt-5 card" >
           Enter a table to update from
           <Input
             onChange={(e) => setTable(e.target.value)}
@@ -82,28 +84,43 @@ const Delete = (props) => {
             id="exampleEmail"
             placeholder="Enter a table"
           />
-        </Row>
-        <Row className="mt-5 card">
-          Enter value you want input
+        </Col>
+        <Col className="mt-5 card">
+          Enter an identifier to find the item to be changed
+          <Input
+            onChange={(e) => setItem(e.target.value)}
+            onKeyDown={handleKeyDown}
+            type="table"
+            name="input"
+            id="exampleEmail"
+            placeholder="Example: id"
+          />
+        </Col>
+          </Row>
+          <Row>
+        <Col className="mt-5 card">
+          Enter the Value ID of the identifier to be changed
+          <Input
+            onChange={(e) => setID(e.target.value)}
+            onKeyDown={handleKeyDown}
+            type="table"
+            name="input"
+            id="exampleEmail"
+            placeholder="Example: 2"
+          />
+        </Col>
+        
+        <Col className="mt-5 card">
+          Enter a value to change your found item to
           <Input
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
             type="table"
             name="input"
             id="exampleEmail"
-            placeholder="Example: iata_id='ZZZ'"
+            placeholder="Example: 3"
           />
-        </Row>
-        <Row className="mt-5 card">
-          Enter an identifier to find the row you want changed
-          <Input
-            onChange={(e) => setWhere(e.target.value)}
-            onKeyDown={handleKeyDown}
-            type="table"
-            name="input"
-            id="exampleEmail"
-            placeholder="Example: id=1"
-          />
+        </Col>
         </Row>
       </Container>
       <Row className="card">
@@ -116,7 +133,7 @@ const Delete = (props) => {
       <Col className="db">
         <ListGroupItem key={n.toString()}
                   className="card"
-                  value={n}>{n}
+                  value={n}>{n.toString()}
                   
                     </ListGroupItem>
                     </Col>
@@ -127,4 +144,4 @@ const Delete = (props) => {
   );
 };
 
-export default Delete;
+export default Update;

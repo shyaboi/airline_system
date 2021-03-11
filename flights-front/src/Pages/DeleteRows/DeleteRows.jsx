@@ -13,28 +13,31 @@ var xhr = new XMLHttpRequest();
 const Delete = (props) => {
 
   const [table, setTable] = useState("");
-  const [where, setWhere] = useState("");
+  const [item, setItem] = useState("");
+  const [id, setID] = useState("");
   const [tableData, setTableData] = useState([]);
   //   const [fetchData, setFetchData] = useState([]);
 
   const poster = () => {
-    let url = "http://localhost:5555/admin/deleteRow";
-    xhr.open("POST", url, true);
+    let url = `http://localhost:5555/admin/${table}/${item}/${id}`;
+    xhr.open("DELETE", url, true);
     xhr.setRequestHeader(
       "Content-Type",
       "application/json"
     );
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
-            alert(xhr.responseText);
+            alert(item + id + " deleted from " + table + xhr.responseText);
+            // alert(item + id + " deleted from " + table)
         }
     }
     
-    xhr.send(table+","+where.toString());
+    xhr.send(table+","+item.toString());
+    console.log(table,item,id)
   };
 
-  const fetcher = (route) => {
-    let r = '/all'+ route.charAt(0).toUpperCase() + route.slice(1) + "s"
+  const fetcher = () => {
+    let r = table
     fetchy(`http://localhost:5555/admin/${r}`).then(async (data) => {
       let d = await data;
       console.log(d)
@@ -83,14 +86,25 @@ const Delete = (props) => {
           />
         </Row>
         <Row className="mt-5 card">
-          Enter an identifier for the row to be deleted
+          Enter an identifier 
           <Input
-            onChange={(e) => setWhere(e.target.value)}
+            onChange={(e) => setItem(e.target.value)}
             onKeyDown={handleKeyDown}
             type="table"
             name="input"
             id="exampleEmail"
-            placeholder="Example: id=1"
+            placeholder="Example: id"
+          />
+        </Row>
+        <Row className="mt-5 card">
+          Enter an key for the identifier to be deleted
+          <Input
+            onChange={(e) => setID(e.target.value)}
+            onKeyDown={handleKeyDown}
+            type="table"
+            name="input"
+            id="exampleEmail"
+            placeholder="Example: 1"
           />
         </Row>
       </Container>
@@ -104,7 +118,7 @@ const Delete = (props) => {
       <Col className="db">
         <ListGroupItem key={n.toString()}
                   className="card"
-                  value={n}>{n}
+                  value={n}>{n.toString()}
                   
                     </ListGroupItem>
                     </Col>

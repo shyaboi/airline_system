@@ -18,7 +18,7 @@ const Add = (props) => {
   //   const [fetchData, setFetchData] = useState([]);
 
   const poster = () => {
-    let url = `http://localhost:5555/admin/add${table.charAt(0).toUpperCase() + table.slice(1)}`;
+    let url = `http://localhost:5555/admin/${table}`;
     xhr.open("POST", url, true);
     xhr.setRequestHeader(
       "Content-Type",
@@ -26,6 +26,7 @@ const Add = (props) => {
     );
     xhr.onreadystatechange = function() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
+           console.log("Message From Spring Servlet:\n"+xhr.responseText);
             alert("Message From Spring Servlet:\n"+xhr.responseText);
         }
     }
@@ -33,8 +34,8 @@ const Add = (props) => {
     xhr.send(values.toString());
   };
 
-  const fetcher = (route) => {
-    let r = '/all'+ route.charAt(0).toUpperCase() + route.slice(1) + "s"
+  const fetcher = () => {
+    let r = table
     fetchy(`http://localhost:5555/admin/${r}`).then(async (data) => {
       let d = await data;
       console.log(d)

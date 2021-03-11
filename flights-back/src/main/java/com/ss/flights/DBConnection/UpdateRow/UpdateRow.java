@@ -5,15 +5,19 @@ import java.sql.SQLException;
 
 import com.ss.flights.DBConnection.Conn;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class UpdateRow {
-    public String updateRow(String data) {
+    @Autowired
+    Conn conn;
+    public String updateRow(String pathTable, String item, String id, String data) {
         // bring in connection from DB new
-        Conn conn = new Conn();
         // split statment into data and where
-        String[] sData = data.split(",");
-        String table = sData[0];
-        String set = sData[1];
-        String where = sData[2];
+        String table = pathTable;
+        String where = item + "='" + id + "'";
+        String set = item + "='" + data + "'";
 
         // parse the given data to sql statment
         String sql = "UPDATE " + table + " SET " + set + " WHERE " + where;
