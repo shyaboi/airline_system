@@ -6,6 +6,7 @@ import com.ss.flights.DBConnection.AddRow.AddRow;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 
 @RequestMapping("/admin")
@@ -42,6 +44,11 @@ public class AddRoutes {
             String[] AirportCols = { "iata_id", "city" };
             try {
                 col.colMaker(AirportCols, cols);
+                add.addTableData(table, cols, data);
+
+                HttpStatus status = HttpStatus.OK;
+                String statusString = status.toString();
+                return statusString + " " + data + " added to " + cols + " !";
 
             } catch (Exception e) {
                 // TODO: handle exception
@@ -56,6 +63,10 @@ public class AddRoutes {
             String[] flightCols = { "id", "route_id", "airplane_id", "departure_time", "reserved_seats", "seat_price" };
             try {
                 col.colMaker(flightCols, cols);
+                add.addTableData(table, cols, data);
+                HttpStatus status = HttpStatus.OK;
+                String statusString = status.toString();
+                return statusString + " " + data + " added to " + cols + " !";
 
             } catch (Exception e) {
                 // TODO: handle exception
@@ -67,7 +78,10 @@ public class AddRoutes {
             String[] bookingCols = { "id", "is_active", "confirmation_code" };
             try {
                 col.colMaker(bookingCols, cols);
-
+                add.addTableData(table, cols, data);
+                HttpStatus status = HttpStatus.OK;
+                String statusString = status.toString();
+                return statusString + " " + data + " added to " + cols + " !";
             } catch (Exception e) {
                 // TODO: handle exception
             }
@@ -80,7 +94,10 @@ public class AddRoutes {
             String[] passengerCols = { "id", "booking_id", "given_name", "family_name", "dob", "gender", "address" };
             try {
                 col.colMaker(passengerCols, cols);
-
+                add.addTableData(table, cols, data);
+                HttpStatus status = HttpStatus.OK;
+                String statusString = status.toString();
+                return statusString + " " + data + " added to " + cols + " !";
             } catch (Exception e) {
                 // TODO: handle exception
             }
@@ -89,28 +106,33 @@ public class AddRoutes {
         case "employee":
             // // add Employee via post data via string of
             // bookin id, agent id
-             // // as a string format such as; 8,6
+            // // as a string format such as; 8,6
             String[] employeeCols = { "employee_id", "first_name", "last_name" };
             try {
                 col.colMaker(employeeCols, cols);
-
+                add.addTableData(table, cols, data);
+                HttpStatus status = HttpStatus.OK;
+                String statusString = status.toString();
+                return statusString + " " + data + " added to " + cols + " !";
             } catch (Exception e) {
                 // TODO: handle exception
-            } 
+            }
             break;
-        
-        
-            case "route":
+
+        case "route":
             // // add route via post data via string of
             // route id, and 2 iata_ids from airports
-             // // as a string format such as; 9, 'SLO', 'LAX'
+            // // as a string format such as; 9, 'SLO', 'LAX'
             String[] routeCols = { "id", "origin_id", "destination_id" };
             try {
                 col.colMaker(routeCols, cols);
-
+                add.addTableData(table, cols, data);
+                HttpStatus status = HttpStatus.OK;
+                String statusString = status.toString();
+                return statusString + " " + data + " added to " + cols + " !";
             } catch (Exception e) {
                 // TODO: handle exception
-            } 
+            }
             break;
         default:
             break;
@@ -118,7 +140,6 @@ public class AddRoutes {
 
         // add given data
         try {
-            add.addTableData(table, cols, data);
         } catch (Exception e) {
             // TODO: handle exception
         }
