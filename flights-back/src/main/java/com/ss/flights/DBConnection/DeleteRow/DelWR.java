@@ -13,8 +13,8 @@ public class DelWR {
        
     @Autowired
     Conn conn;
+    
     public String delete(String table,String item, String id) {
-        // bring in connection from DB new
 
         // parse the given data to sql statment
         String sql = "DELETE FROM " + table + " WHERE " + item +"='"+id+"'";

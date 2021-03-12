@@ -105,7 +105,7 @@ const Add = (props) => {
       <Col className="db">
         <ListGroupItem key={n.toString()}
                   className="card"
-                  value={n}>{n}
+                  value={n}>{n.toString()}
                   
                     </ListGroupItem>
                     </Col>

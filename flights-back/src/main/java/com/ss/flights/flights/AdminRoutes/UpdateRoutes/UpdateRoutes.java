@@ -3,6 +3,7 @@ package com.ss.flights.flights.AdminRoutes.UpdateRoutes;
 import com.ss.flights.DBConnection.UpdateRow.UpdateRow;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +31,9 @@ public class UpdateRoutes {
 
         try {
             update.updateRow(table, item, id, data);
+            HttpStatus status = HttpStatus.OK;
+            String statusString = status.toString();
+            return statusString+" "+item+" "+id+" Updated!";
 
         } catch (Exception e) {
             // TODO: handle exception
